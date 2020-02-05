@@ -8,6 +8,16 @@ module.exports = {
     return response.json(devs);
   },
 
+  async destroy(request, response) {
+    const { github_username } = request.body;
+
+    const dev = await Dev.findOneAndRemove({
+      github_username
+    });
+
+    return response.json({});
+  },
+
   async store(request, response) {
     const { github_username, techs, latitude, longitude } = request.body;
 
