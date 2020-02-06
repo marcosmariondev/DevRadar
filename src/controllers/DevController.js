@@ -47,5 +47,28 @@ module.exports = {
     }
 
     return response.json(dev);
+  },
+
+  async update(request, response) {
+    const {
+      github_username,
+      name,
+      techs,
+      latitude,
+      longitude,
+      avatar_url,
+      bio
+    } = request.body;
+    console.log(dev);
+
+    let techsArray = null;
+    if (techs) techsArray = parseStringAsArray(techs);
+
+    let dev = await Dev.findOneAndUpdate(
+      { github_username },
+      { name, latitude, longitude }
+    );
+
+    return response.json(dev);
   }
 };
